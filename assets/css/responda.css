@@ -71,7 +71,7 @@
 .resposta-img,
 .resultado-img {
     width: 100%;
-    height: 175px;
+    height: auto;
     object-fit: cover;
 }
 
