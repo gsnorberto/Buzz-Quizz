@@ -1,0 +1,127 @@
+.responda{
+    background-color: rgb(240,240,240);
+    width: 100%;
+    min-height: 100vh;
+    overflow-y: hidden;
+    padding-top: 69px;
+    padding-bottom: 60px;
+}
+
+.imagem-topo{
+    width: 100%;
+    height: 227px;
+    position: relative;
+}
+.imagem-topo img{
+    width: 100%;
+    height: 227px;
+    object-fit: cover;
+    filter: brightness(60%);
+}
+.imagem-topo h1{
+    position: relative;
+    top: -60%;
+    width: 100%;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 0 20px;
+    font-size: 39px;
+}
+
+.area-quizz{
+    max-width: 759px;
+    margin: 0 auto;
+    margin-top: 42px;
+}
+.quizz{
+    background-color: #FFFFFF;
+    padding: 27px 34px;
+    margin-bottom: 42px;
+}
+.respostas-quizz,
+.resultados-quizz{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+}
+.pergunta-quizz{
+    width: 100%;
+    height: 135px;
+    background-color: #434CA0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    font-size: 23px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.pergunta-quizz{
+    padding: 15px;
+}
+.resposta-quizz{
+    
+}
+.resposta-desc{
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 8px;
+}
+.resposta-img,
+.resultado-img {
+    width: 100%;
+    height: 175px;
+    object-fit: cover;
+}
+
+.titulo-resultado{
+    width: 100%;
+    height: 100px;
+    background-color: #EC362D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    font-size: 23px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.resultado-desc{
+    color: #484848;
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.botoes-quizz{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.botao-reiniciarQuizz{
+    width: 260px;
+    height: 50px;
+    background-color: #EC362D;
+    color: #FFF5F4;
+    border: 0;
+    border-radius: 15px;
+    font-size: 21px;
+    cursor: pointer;
+}
+.botao-reiniciarQuizz:hover{
+    opacity: 0.7;
+}
+.botao-home{
+    margin-top: 25px;
+    background-color: tranparent;
+    color: #818181;
+    border: 0;
+    font-size: 21px;
+    cursor: pointer;
+}
+.botao-home:hover{
+    opacity: 0.7;
+}
