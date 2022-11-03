@@ -16,23 +16,20 @@ header {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     z-index: 3;
 }
-
 .container {
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
     background-color: #E5E5E5;
-    position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 69px;
+    padding-top: 146px;
 }
 
-.quizzes-usuario {
+.quizzes-usuario-vazio {
     width: 1051px;
     height: 181px;
     background-color: #FAFAFA;
-    margin-top: 160px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -49,6 +46,7 @@ header {
     padding: 0 10px;
     text-align: center;
     color: #B9B9B9;
+    position: relative;
 
     font-family: "Roboto";
     font-weight: 400;
@@ -56,8 +54,8 @@ header {
 
 }
 
-.quizzes-usuario button {
-    width: 151px;
+.quizzes-usuario-vazio button {
+    width: 136px;
     height: 40px;
     border-radius: 50px;
     border: 1px dashed #EC362D;
@@ -68,15 +66,51 @@ header {
     font-weight: 400;
     font-size: 21px;
 }
-
-.todos-os-quizzes {
+.quizzes-usuario{
     width: 1051px;
     background-color: #E5E5E5;
     margin-top: 77px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+
+}
+.quizzes-usuario .topo{
+    background-color: #E5E5E5;
+    width: 1051px;
+    margin-bottom: 13px;
+    display: flex;
+    align-items: center;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+}
+.quizzes-usuario button{
+    height: 30px;
+    width: 31px;
+    border-radius: 500px;
+    margin-left: 17px;
+    background-color: #EC362D;
+    border: none;
+    cursor: pointer;
+    
+    color: #FFFFFF;
+}
+.escondido{
+    display: none;
+}
+.todos-os-quizzes {
+    width: 1051px;
+    height: 100%;
+    background-color: #E5E5E5;
+    margin-top: 77px;
+    display: flex;
+    flex-wrap: wrap;
     position: relative;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
 
 }
@@ -95,6 +129,7 @@ header {
 .quizzes-gerais {
     position: relative;
     margin-bottom: 5px;
+    margin-right: 10px;
 
 
 }

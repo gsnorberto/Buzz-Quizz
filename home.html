@@ -22,14 +22,32 @@
     <header>BuzzQuizz</header>
     <!-- Lista de quizes-->
     <div class="container">
-        <!-- Quizzes do usuario-->
-        <did class="quizzes-usuario">
+        <!-- Quizzes do usuario Vazio-->
+        <did class="quizzes-usuario-vazio" >
             <div class="quizz-status-usuario">
                 <p>Você não criou nenhum quizz ainda :(</p>
             </div>
-            <button>Criar Quizz</button>
-        <!-- Quizzes gerais-->
+            <button onclick="reconfigurarHomeUsuario()">Criar Quizz</button>
         </did>
+        <h1></h1>
+        <!-- Quizzes do usuario-->
+        <div class="quizzes-usuario escondido">
+            <div class="topo">
+                <h1>Seus Quizzes</h1>
+                <button onclick="reconfigurarHomeUsuario()">+</button>
+            </div>
+            <div class="quizzes-gerais"> 
+                <img src="https://cdn3.whatculture.com/images/2020/03/b1cfa951649aeed6-1200x675.jpg"/>
+                <div class="efeito-imagem"></div>
+                <div class="titulo-quiz">Acerte os personagens corretos dos Simpsons e prove seu amor!</div>
+            </div>
+            <div class="quizzes-gerais"> 
+                <img src="https://cdn3.whatculture.com/images/2020/03/b1cfa951649aeed6-1200x675.jpg"/>
+                <div class="efeito-imagem"></div>
+                <div class="titulo-quiz">Acerte os personagens corretos dos Simpsons e prove seu amor!</div>
+            </div>
+        </div>
+        <!-- Todos os Quizzes-->
         <div class="todos-os-quizzes">
             <h1>Todos os Quizzes</h1>
             <div class="quizzes-gerais"> 
