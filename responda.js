@@ -9,7 +9,7 @@ axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes")
     .then((response) => {
         todosOsQuizzes = response.data;
         console.log(todosOsQuizzes);
-        renderizarQuizzes(15230);
+        renderizarQuizzes(15669); //id do quizz
     }).catch((error) => {
         console.log("Erro ao obter todos os Quizzes");
     });
@@ -114,7 +114,20 @@ function verificarResposta(resClicada, numDaQuestao){
     if(numDaQuestao === qntPerguntas-1){
         console.log("Chegou!!!");
         renderizarResposta();
+
+        //Scrollar para resposta final depois de 2s
+        setTimeout(() => {
+            let proxQuizz = document.querySelector('.resultado-quizz')
+            proxQuizz.scrollIntoView();
+        }, 2000);
+    } else {
+        //Scrollar para próxima pergunta depois de 2s
+        setTimeout(() => {
+            let proxQuizz = document.querySelector(`.area-quizz .quizz:nth-child(${numDaQuestao+2})`)
+            proxQuizz.scrollIntoView();
+        }, 2000);
     }
+
 }
 
 //Renderizar Resposta
