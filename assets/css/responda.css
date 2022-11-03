@@ -68,6 +68,10 @@
     font-weight: 700;
     margin-top: 8px;
 }
+.resposta-desc,
+.resposta-img{
+    cursor: pointer;
+}
 .resposta-img,
 .resultado-img {
     width: 100%;
