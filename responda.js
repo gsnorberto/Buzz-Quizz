@@ -163,3 +163,11 @@ function renderizarResposta(){
         </div>
     `
 }
+
+function reiniciarQuizz() {
+    document.location.reload(true);
+}
+function voltarParaHome() {
+    //Mostrar página home - Tela1: Lista de Quizzes
+    //Ocultar página Responda
+}
