@@ -1,6 +1,8 @@
 let todosOsQuizzes = [];
 let respostasCorretas = [];
 let quizzClicado = {}; // Todas as informações do Quizz
+let qntAcertos = 0; // Quantidade de questões acertadas pelo usuário
+let qntPerguntas; // Quantidade de perguntas que o quizz possui
 
 // (Provisório) Obter todos os Quizzes
 axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes")
@@ -12,10 +14,11 @@ axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes")
         console.log("Erro ao obter todos os Quizzes");
     });
 
-//Renderizar elementos na tela
+//Renderizar os quizzes na tela
 function renderizarQuizzes(id) {
     quizzClicado = (todosOsQuizzes.filter((q) => q.id === id))[0];
     console.log(quizzClicado);
+    qntPerguntas = quizzClicado.questions.length;
 
     //Título do quizz: ok
     document.querySelector('.responda .imagem-topo').innerHTML = `
@@ -73,18 +76,17 @@ function renderizarQuizzes(id) {
                 </div>
             </div>
         `
-
     }
-
     
     //Tirar oculto da tag area quizz
     // pendente.... 
 }
 
+// Verificar se a resposta está certa ou errada no momento em que o usuário clica em uma opção
 function verificarResposta(resClicada, numDaQuestao){
     //Resposta verdadeira
     if(respostasCorretas[numDaQuestao] == resClicada){
-        
+        qntAcertos++;
         console.log("Acertou")
     } else { //Resposta verdadeira
         console.log("Errou")
@@ -104,6 +106,47 @@ function verificarResposta(resClicada, numDaQuestao){
             document.getElementById(`${numDaQuestao}${i}`).style.opacity = "0.3";
         }
 
+        //Remove o click das respostas do quizz respondido
         document.getElementById(`${numDaQuestao}${i}`).removeAttribute("onclick");
     }
+
+    //Chegou na última pergunta
+    if(numDaQuestao === qntPerguntas-1){
+        console.log("Chegou!!!");
+        renderizarResposta();
+    }
+}
+
+//Renderizar Resposta
+function renderizarResposta(){
+    let prctAcertos = Math.round((qntAcertos / qntPerguntas) * 100);
+    let respostaFinal;
+
+    //Define o level correspondendte à quantidade de acertos
+    for(let i = 0; i < quizzClicado.levels.length; i++) {
+        if(prctAcertos >= quizzClicado.levels[i].minValue){
+            respostaFinal = quizzClicado.levels[i];
+        }
+    }
+
+    console.log(respostaFinal);
+
+    //Renderizar Resposta Final na tela
+    document.querySelector('.area-quizz').innerHTML += `
+        <div class="quizz resultado-quizz">
+            <div class="titulo-resultado pergunta-3">
+                ${prctAcertos}% de acerto: ${respostaFinal.title}!
+            </div>
+            <div class="resultados-quizz">
+                <div class="requltado-quizz">
+                    <img class="resultado-img"
+                        src=${respostaFinal.image}
+                        alt="">
+                </div>
+                <div class="resultado-desc">
+                    ${respostaFinal.text}
+                </div>
+            </div>
+        </div>
+    `
 }
