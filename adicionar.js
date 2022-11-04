@@ -116,57 +116,72 @@ function validarPerguntas(){
         if((form[i][0].value).length < 20){
             console.log('titulo invalido')
             alert('Preencha a pergunta corretamente')
+            return
         } else if (padrao.test(form[i][1].value) === false){
             console.log('cor invalida')
             alert('Preencha a cor corretamente')
+            return
         } else if((form[i][2].value) === '' || (form[i][3].value) === ''){
             console.log("ta vazio a resposta correta")
             alert("Preencha a resposta corretamente")
+            return
         } else if((form[i][4].value) === '' && (form[i][6].value) === '' && (form[i][8].value) === ''){
             console.log('ta vazia todas as respostas erradas')
             alert('Preencha alguma das respostas erradas pelo menos')
+            return
         } else if (form[i][3] !== ''){
             if(verificaUrl(form[i][3].value) === false){
                 console.log('eita')
                 alert('Preencha a url corretamente')
+                return
             }
         } else if (form[i][5] !== ''){
             if(verificaUrl(form[i][5].value) === false){
                 console.log('eita')
                 alert('Preencha a url corretamente')
+                return
             }
         } else if (form[i][7] !== ''){ 
             if(verificaUrl(form[i][7].value) === false){
                 console.log('eita')
                 alert('Preencha a url corretamente')
+                return
             }
         } else if (form[i][9] !== ''){ 
             if(verificaUrl(form[i][9].value) === false){
                 console.log('eita')
                 alert('Preencha a url corretamente')
+                return
             }
-        } else{
-            criarPerguntas.classList.add('escondido')
-            criarNiveis.classList.remove('escondido')
-        }
+        } 
     }
+
+    mudarTelaNiveis()
 }
+
+//função para abri a tela de criação de niveis
+
+function mudarTelaNiveis(){
+    criarPerguntas.classList.add('escondido')
+    criarNiveis.classList.remove('escondido')
+    inserirNiveis();
+}
+
 //função para inserir o número de níveis escolhidos pelo usuário 
-inserirNiveis();
 
 function inserirNiveis(){
     const espacoNiveis = document.querySelector(".espaco-niveis");
     console.log(espacoNiveis);
     for (let i=0; numNiveis>i ; i++){
         espacoNiveis.innerHTML+=`
-    <div class="caixa-nivel n${i+1}" onclick="editarPergunta(this)">
+    <div class="caixa-nivel z${i+1}" onclick="editarPergunta(this)">
         <p>Nível ${i+1}</p>
         <button><img src="./Vector.svg"></button>
     </div>
-    <form class="n${i+1} escondido">
+    <form class="z${i+1} escondido">
         <p>Nível ${i+1}</p>
         <input type="text" class="titulo-quizz" placeholder="Título do nível">
-        <input type="text" class="acerto-minimo" placeholder="% de acerto mínima">
+        <input type="number" class="acerto-minimo" placeholder="% de acerto mínima">
         <input type="text" class="url-nivel" placeholder="URL da imagem do nível">
         <input type="text" class="descrição-nivel" placeholder="Descrição do nível">
     </form>
