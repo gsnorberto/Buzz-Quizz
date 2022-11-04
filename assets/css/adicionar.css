@@ -2,6 +2,7 @@ body{
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
     background-color: #FAFAFA;
+    padding-bottom: 20px;
 }
 
 /* header{
@@ -17,19 +18,25 @@ body{
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 } */
 
-.infos-basicas{
-    padding-top: 70px;
+.infos-basicas, .criar-perguntas {
+    padding-top: 130px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.infos-basicas h1{
+h1{
     font-weight: 700;
     font-size: 23px;
     color: #000000;
+}
 
+p{
+    font-weight: 700;
+    font-size: 20px;
+    color: #000000;
+    margin-bottom: 12px;
 }
 
 .infos-basicas form{
@@ -41,8 +48,9 @@ body{
     padding: 16px 16px;
 }
 
-.infos-basicas form input{
-    width: 541px;
+form input{
+    box-sizing: border-box;
+    width: 100%;
     height: 46px;
     border: 1px solid #D1D1D1;
     border-radius: 5px;
@@ -53,7 +61,7 @@ body{
 }
 
 
-.infos-basicas form input::placeholder{
+form input::placeholder{
     font-size: 19px;
     font-style: italic;
     font-weight: 400;
@@ -74,4 +82,59 @@ body{
     border: none;
     margin-top: 85px;
     cursor: pointer;
+}
+
+.criar-perguntas form{
+    margin-top: 36px;
+    width: 600px;
+    height: 780px;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
+    padding: 27px 17px;
+}
+
+.caixa{
+    margin-bottom: 20px;
+}
+
+.caixa-pergunta{
+    width: 601px;
+    height: 74px;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
+    margin-top: 23px;
+    padding: 24px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.caixa-pergunta p{
+    margin-bottom: 0;
+}
+
+.caixa-pergunta button{
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.prosseguir{
+    width: 352px;
+    height: 54px;
+    font-size: 21px;
+    font-weight: 400;
+    color: #FFF5F4;
+    background-color: #EC362D;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    margin-top: 81px;
+    cursor: pointer;
+}
+
+.escondido{
+    display: none;
 }

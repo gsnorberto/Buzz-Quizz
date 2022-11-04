@@ -22,17 +22,31 @@
     <!-- cabeçalho -->
     <header>BuzzQuizz</header>
 
-    <!-- Comece pelo começo -->
-    <div class="infos-basicas">
-        <h1>Comece pelo começo</h1>
-        <form>
-            <input type="text" class="titulo-quizz" placeholder="Título do seu quizz">
-            <input type="text" class="url-quizz" placeholder="URL da imagem do seu quizz">
-            <input type="text" class="qntd-perguntas" placeholder="Quantidade de perguntas do quizz">
-            <input type="text" class="qntd-niveis" placeholder="Quantidade de níveis do quizz">
-        </form>
-        <button onclick='validarInformacoes()'>Prosseguir pra criar perguntas</button>
-    </div>
+    <div class="adicionar-quizz">
+        <!-- Comece pelo começo -->
+        <div class="infos-basicas">
+            <h1>Comece pelo começo</h1>
+            <form>
+                <input type="text" class="titulo-quizz" placeholder="Título do seu quizz">
+                <input type="text" class="url-quizz" placeholder="URL da imagem do seu quizz">
+                <input type="text" class="qntd-perguntas" placeholder="Quantidade de perguntas do quizz">
+                <input type="text" class="qntd-niveis" placeholder="Quantidade de níveis do quizz">
+            </form>
+            <button onclick='validarInformacoes()'>Prosseguir pra criar perguntas</button>
+        </div>
+        <!-- Crie suas perguntas -->
+        <div class="criar-perguntas escondido">
+            <h1>Crie suas perguntas</h1>
+
+            <div class="espaco-perguntas">
+            </div>
+            <!-- Botão Prosseguir -->
+            <button class="prosseguir" onclick='validarPerguntas()'>Prosseguir pra criar níveis</button>
+        </div>
+
+        <!-- Crie os  níveis -->
+        <div class="criar-niveis escondido"></div>
+    </div>  
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./adicionar.js"></script>
