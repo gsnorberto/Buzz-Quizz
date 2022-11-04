@@ -24,13 +24,13 @@
 
     <div class="adicionar-quizz">
         <!-- Comece pelo começo -->
-        <div class="infos-basicas escondido">
+        <div class="infos-basicas">
             <h1>Comece pelo começo</h1>
             <form>
                 <input type="text" class="titulo-quizz" placeholder="Título do seu quizz">
                 <input type="text" class="url-quizz" placeholder="URL da imagem do seu quizz">
-                <input type="text" class="qntd-perguntas" placeholder="Quantidade de perguntas do quizz">
-                <input type="text" class="qntd-niveis" placeholder="Quantidade de níveis do quizz">
+                <input type="number" class="qntd-perguntas" placeholder="Quantidade de perguntas do quizz">
+                <input type="number" class="qntd-niveis" placeholder="Quantidade de níveis do quizz">
             </form>
             <button onclick='validarInformacoes()'>Prosseguir pra criar perguntas</button>
         </div>
@@ -45,7 +45,7 @@
         </div>
 
         <!-- Crie os  níveis -->
-        <div class="criar-niveis  ">
+        <div class="criar-niveis escondido">
             <h1>Agora, decida os níveis</h1>
             
             <div class="espaco-niveis">
