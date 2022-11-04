@@ -3,6 +3,7 @@ let respostasCorretas = [];
 let quizzClicado = {}; // Todas as informações do Quizz
 let qntAcertos = 0; // Quantidade de questões acertadas pelo usuário
 let qntPerguntas; // Quantidade de perguntas que o quizz possui
+let perguntaAtual = 0;
 
 // (Provisório) Obter todos os Quizzes
 axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes")
@@ -84,48 +85,55 @@ function renderizarQuizzes(id) {
 
 // Verificar se a resposta está certa ou errada no momento em que o usuário clica em uma opção
 function verificarResposta(resClicada, numDaQuestao){
-    //Resposta verdadeira
-    if(respostasCorretas[numDaQuestao] == resClicada){
-        qntAcertos++;
-        console.log("Acertou")
-    } else { //Resposta verdadeira
-        console.log("Errou")
-    }
-
-    //Marcar respostas certas e erradas
-    for(let i = 0; i < quizzClicado.questions[numDaQuestao].answers.length; i++){
-        //resposta certa
-        if(respostasCorretas[numDaQuestao] == i){
-            document.getElementById(`${numDaQuestao}${i}`).style.color = "#009C22";
-        } else { // resposta errada
-            document.getElementById(`${numDaQuestao}${i}`).style.color = "#FF4B4B";
+    if(numDaQuestao === perguntaAtual){
+        perguntaAtual ++;
+        //Resposta verdadeira
+        if(respostasCorretas[numDaQuestao] == resClicada){
+            qntAcertos++;
+            console.log("Acertou")
+        } else { //Resposta verdadeira
+            console.log("Errou")
         }
-
-        //Diminui a opacidade dos itens não clicados
-        if(resClicada !== i){
-            document.getElementById(`${numDaQuestao}${i}`).style.opacity = "0.3";
+    
+        //Marcar respostas certas e erradas
+        for(let i = 0; i < quizzClicado.questions[numDaQuestao].answers.length; i++){
+            //resposta certa
+            if(respostasCorretas[numDaQuestao] == i){
+                document.getElementById(`${numDaQuestao}${i}`).style.color = "#009C22";
+            } else { // resposta errada
+                document.getElementById(`${numDaQuestao}${i}`).style.color = "#FF4B4B";
+            }
+    
+            //Diminui a opacidade dos itens não clicados
+            if(resClicada !== i){
+                document.getElementById(`${numDaQuestao}${i}`).style.opacity = "0.3";
+            }
+    
+            //Remove o click das respostas do quizz respondido
+            document.getElementById(`${numDaQuestao}${i}`).removeAttribute("onclick");
         }
-
-        //Remove o click das respostas do quizz respondido
-        document.getElementById(`${numDaQuestao}${i}`).removeAttribute("onclick");
-    }
-
-    //Chegou na última pergunta
-    if(numDaQuestao === qntPerguntas-1){
-        console.log("Chegou!!!");
-        renderizarResposta();
-
-        //Scrollar para resposta final depois de 2s
-        setTimeout(() => {
-            let proxQuizz = document.querySelector('.resultado-quizz')
-            proxQuizz.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
-        }, 2000);
+    
+        //Chegou na última pergunta
+        if(numDaQuestao === qntPerguntas-1){
+            console.log("Chegou!!!");
+            renderizarResposta();
+    
+            //Scrollar para resposta final depois de 2s
+            setTimeout(() => {
+                let proxQuizz = document.querySelector('.resultado-quizz')
+                proxQuizz.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+            }, 2000);
+        } else {
+            //Scrollar para próxima pergunta depois de 2s
+            setTimeout(() => {
+                let proxQuizz = document.querySelector(`.area-quizz .quizz:nth-child(${numDaQuestao+2})`)
+                proxQuizz.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+            }, 2000);
+        }
     } else {
-        //Scrollar para próxima pergunta depois de 2s
-        setTimeout(() => {
-            let proxQuizz = document.querySelector(`.area-quizz .quizz:nth-child(${numDaQuestao+2})`)
-            proxQuizz.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
-        }, 2000);
+        alert(`Responda o quizz ${perguntaAtual + 1}`);
+        let proxQuizz = document.querySelector(`.area-quizz .quizz:nth-child(${perguntaAtual + 1})`)
+        proxQuizz.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
     }
 
 }

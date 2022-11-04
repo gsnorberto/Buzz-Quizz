@@ -21,9 +21,11 @@ function iniciarQuizz(){
 importarQuizzes();
 reinderizarTodosQuizzes();
 function reinderizarTodosQuizzes(resposta){
+    console.log("resposta chegou");
+    console.log(resposta.data)
     for(let i=0; i<=50;i++){
         quizzesGerais.innerHTML+=`
-        <div class="quizzes-gerais" onclick="iniciarQuizz()"> 
+        <div class="quizz" onclick="renderizarQuizzes(${resposta.data[i].id})"> 
             <img src="${resposta.data[i].image}"/>
             <div class="efeito-imagem"></div>
             <div class="titulo-quiz">${resposta.data[i].title}</div>
@@ -36,5 +38,6 @@ function reinderizarTodosQuizzes(resposta){
 function importarQuizzes(){
     let promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
     promise.then(reinderizarTodosQuizzes);
+    promise.catch((error) => {console.log("Erro ao obter todos os Quizzes")});
 }
 

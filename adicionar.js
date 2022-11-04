@@ -223,7 +223,7 @@ function validarNiveis(){
             listaBool.push(true);
         }
     }
-    if(listaBool.length===0){
+    if(listaBool.length === 0){
         console.log("uma porcentagem zero, ao menos");
         alert("Pelo menos um nível com a porcentagem de acerto igual a 0%");
     }
@@ -231,3 +231,8 @@ function validarNiveis(){
         criarNiveis.classList.add('escondido'); 
     }
 }
+
+// função acessar home //
+ function volarHome(){
+
+ }
