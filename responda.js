@@ -9,7 +9,7 @@ axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes")
     .then((response) => {
         todosOsQuizzes = response.data;
         console.log(todosOsQuizzes);
-        renderizarQuizzes(15669); //id do quizz
+        renderizarQuizzes(todosOsQuizzes[10].id); //id do quizz
     }).catch((error) => {
         console.log("Erro ao obter todos os Quizzes");
     });
@@ -118,13 +118,13 @@ function verificarResposta(resClicada, numDaQuestao){
         //Scrollar para resposta final depois de 2s
         setTimeout(() => {
             let proxQuizz = document.querySelector('.resultado-quizz')
-            proxQuizz.scrollIntoView();
+            proxQuizz.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
         }, 2000);
     } else {
         //Scrollar para próxima pergunta depois de 2s
         setTimeout(() => {
             let proxQuizz = document.querySelector(`.area-quizz .quizz:nth-child(${numDaQuestao+2})`)
-            proxQuizz.scrollIntoView();
+            proxQuizz.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
         }, 2000);
     }
 
