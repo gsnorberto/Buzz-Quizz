@@ -19,8 +19,8 @@
     filter: brightness(60%);
 }
 .imagem-topo h1{
-    position: relative;
-    top: -60%;
+    position: absolute;
+    top: 35%;
     width: 100%;
     text-align: center;
     color: #FFFFFF;
@@ -40,6 +40,7 @@
 }
 .respostas-quizz,
 .resultados-quizz{
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 15px;
@@ -61,7 +62,7 @@
     padding: 15px;
 }
 .resposta-quizz{
-    
+    width: 100%;
 }
 .resposta-desc{
     font-size: 20px;
@@ -71,6 +72,8 @@
 .resposta-desc,
 .resposta-img{
     cursor: pointer;
+    max-width: 340px;
+    word-break: break-all;
 }
 .resposta-img,
 .resultado-img {
