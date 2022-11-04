@@ -16,7 +16,7 @@ function verificaUrl(termo) {
  }
 
  let numPerguntas
- let numNiveis
+ let numNiveis=2;
  let titulo
  let url
 
@@ -149,5 +149,70 @@ function validarPerguntas(){
             criarPerguntas.classList.add('escondido')
             criarNiveis.classList.remove('escondido')
         }
+    }
+}
+//função para inserir o número de níveis escolhidos pelo usuário 
+inserirNiveis();
+
+function inserirNiveis(){
+    const espacoNiveis = document.querySelector(".espaco-niveis");
+    console.log(espacoNiveis);
+    for (let i=0; numNiveis>i ; i++){
+        espacoNiveis.innerHTML+=`
+    <div class="caixa-nivel n${i+1}" onclick="editarPergunta(this)">
+        <p>Nível ${i+1}</p>
+        <button><img src="./Vector.svg"></button>
+    </div>
+    <form class="n${i+1} escondido">
+        <p>Nível ${i+1}</p>
+        <input type="text" class="titulo-quizz" placeholder="Título do nível">
+        <input type="text" class="acerto-minimo" placeholder="% de acerto mínima">
+        <input type="text" class="url-nivel" placeholder="URL da imagem do nível">
+        <input type="text" class="descrição-nivel" placeholder="Descrição do nível">
+    </form>
+    `
+    }
+}
+
+//função para validar as informações dos níveis
+function validarNiveis(){
+    const form= []
+    for(let i=0; numNiveis>i; i++){
+        let formulario = document.querySelector(`form.n${i+1}`)
+        form.push(formulario)
+    }
+
+    for(let i=0; form.length>i ; i++){
+        if((form[i][0].value).length < 20){
+            console.log('titulo invalido');
+            alert('Preencha o título do nível corretamente');
+        }
+        else if(Number((form[i][1].value)) >= 100 || Number((form[i][1].value))<0 ){
+            console.log("% inválida");
+            alert("Porcentagem mínima inválida");
+        }
+        else if (verificaUrl(form[i][2].value) === false){
+            console.log("url inválida");
+            alert("Preencha a url corretamente");
+        }
+        else if (form[i][3].length < 30 ){
+            console.log("Descrição invalida");
+            alert("Preencha a descrição corretamente");
+
+        }
+       
+    }
+    let listaBool=[];
+    for(let i=0; form.length>i ; i++){
+        if(Number((form[i][1].value)) === 0){
+            listaBool.push(true);
+        }
+    }
+    if(listaBool.length===0){
+        console.log("uma porcentagem zero, ao menos");
+        alert("Pelo menos um nível com a porcentagem de acerto igual a 0%");
+    }
+    else{
+        criarNiveis.classList.add('escondido'); 
     }
 }

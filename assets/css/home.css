@@ -61,6 +61,7 @@ header {
     border: 1px dashed #EC362D;
     color: #EC362D;
     background-color: #FAFAFA;
+    cursor: pointer;
 
     font-family: "Roboto";
     font-weight: 400;
@@ -130,6 +131,7 @@ header {
     position: relative;
     margin-bottom: 5px;
     margin-right: 10px;
+    cursor: pointer;
 
 
 }

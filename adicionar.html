@@ -24,7 +24,7 @@
 
     <div class="adicionar-quizz">
         <!-- Comece pelo começo -->
-        <div class="infos-basicas">
+        <div class="infos-basicas escondido">
             <h1>Comece pelo começo</h1>
             <form>
                 <input type="text" class="titulo-quizz" placeholder="Título do seu quizz">
@@ -45,8 +45,15 @@
         </div>
 
         <!-- Crie os  níveis -->
-        <div class="criar-niveis escondido"></div>
-    </div>  
+        <div class="criar-niveis  ">
+            <h1>Agora, decida os níveis</h1>
+            
+            <div class="espaco-niveis">
+            </div>
+            <!-- Botão Finalizar-->
+            <button class='finalizar'  onclick='validarNiveis()'>Finalizar quizz</button>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./adicionar.js"></script>
