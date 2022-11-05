@@ -232,7 +232,25 @@ function validarNiveis(){
     }
 }
 
-// função acessar home //
- function volarHome(){
+//armazenar quizzes do usuário 
+const todosQuizzes = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
+todosQuizzes.then((sucesso) => {console.log(sucesso.data)});
+let quizzCriado =  {objetoNoFormato:id} ;
+const enviandoQuizz = axios.post("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes", quizzCriado);
+    //diz-se que o api retornará o objeto completo do quizz criado, incluindo o id (identificador único) que o servidor gerou pra este quizz
+    //supor obter id = 16629:
 
+let idUsuario = ["16629"];  // Array que você quer salvar
+const idUsuarioSerializado = JSON.stringify(idUsuario); // Array convertida pra uma string
+localStorage.setItem("lista", idUsuarioSerializado); // Armazenando a string na chave "lista" do Local Storage
+const listaSerializada = localStorage.getItem("lista"); // Pegando de volta a string armazenada na chave "lista"
+const lista = JSON.parse(listaSerializada); // Transformando a string de volta na array original
+
+
+
+
+
+// função acessar home 
+ function volarHome(){
  }
+
