@@ -263,3 +263,22 @@ form input::placeholder{
 .escondido{
     display: none;
 }
+
+@media (max-width: 614px) {
+    .infos-basicas form{
+        width: 375px;
+        height: 256px;
+    }
+
+    .infos-basicas button{
+        width: 368px;
+    }
+
+    .caixa-pergunta, .criar-perguntas form, .criar-niveis form, .caixa-nivel{
+        width: 375px;
+    }
+
+    .prosseguir, .finalizar{
+        width: 324px;
+    }
+}
