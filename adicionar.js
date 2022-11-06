@@ -6,7 +6,7 @@ const criarPerguntas = document.querySelector('.criar-perguntas');
 const criarNiveis = document.querySelector('.criar-niveis');
 
 //lista com o quizz criado pelo usuário
-let dadosCriacaoQuizz = {title:"" , image:"", questions: [], levels: []}
+let dadosCriacaoQuizz = { title: "", image: "", questions: [], levels: [] };
 
 //verifica se a string é um url
 function verificaUrl(termo) {
@@ -46,8 +46,8 @@ function validarInformacoes() {
         return alert("Preencha o número de níveis corretamente");
     } else if (urlQuizz !== '') {
         if (verificaUrl(urlQuizz) === true) {
-            dadosCriacaoQuizz.title = tituloQuizz
-            dadosCriacaoQuizz.image = urlQuizz
+            dadosCriacaoQuizz.title = tituloQuizz;
+            dadosCriacaoQuizz.image = urlQuizz;
             infosBasicas.classList.add('escondido');
             criarPerguntas.classList.remove('escondido');
             inserirPerguntas();
@@ -57,7 +57,7 @@ function validarInformacoes() {
     }
 }
 
-console.log(dadosCriacaoQuizz)
+console.log(dadosCriacaoQuizz);
 
 //insere o número de Perguntas escolhido pelo usuário na 1ª tela
 function inserirPerguntas() {
@@ -114,7 +114,7 @@ function editarPergunta(item) {
 function validarPerguntas() {
 
     let quizzQuestion = [];
-   
+
     const form = [];
     for (let i = 0; numPerguntas > i; i++) {
         let formulario = document.querySelector(`form.n${i + 1}`);
@@ -192,11 +192,11 @@ function validarPerguntas() {
                     isCorrectAnswer: false
                 }
             ]
-        })
-        
+        });
+
     }
 
-    dadosCriacaoQuizz.questions.push(quizzQuestion)
+    dadosCriacaoQuizz.questions.push(quizzQuestion);
     mudarTelaNiveis();
 }
 
@@ -209,7 +209,7 @@ function mudarTelaNiveis() {
     inserirNiveis();
 }
 
-//função para inserir o número de níveis escolhidos pelo usuário 
+// insere o número de níveis escolhidos pelo usuário 
 
 function inserirNiveis() {
     const espacoNiveis = document.querySelector(".espaco-niveis");
@@ -234,10 +234,10 @@ function inserirNiveis() {
 //função para validar as informações dos níveis
 function validarNiveis() {
 
-    let quizzNivel = []
+    let quizzNivel = [];
 
     const form = [];
-        for (let i = 0; numNiveis > i; i++) {
+    for (let i = 0; numNiveis > i; i++) {
         let formulario = document.querySelector(`form.n${i + 1}`);
         form.push(formulario);
     }
@@ -246,34 +246,34 @@ function validarNiveis() {
         if ((form[i][0].value).length < 20) {
             console.log('titulo invalido');
             alert('Preencha o título do nível corretamente');
-            return
+            return;
         }
         else if (Number((form[i][1].value)) >= 100 || Number((form[i][1].value)) < 0) {
             console.log("% inválida");
             alert("Porcentagem mínima inválida");
-            return
+            return;
         }
         else if (verificaUrl(form[i][2].value) === false) {
             console.log("url inválida");
             alert("Preencha a url corretamente");
-            return
+            return;
         }
         else if (form[i][3].length < 30) {
             console.log("Descrição invalida");
             alert("Preencha a descrição corretamente");
-            return
+            return;
         }
-        
+
         quizzNivel.push({
             title: form[i][0].value,
             image: form[i][2].value,
             text: form[i][3].value,
             minValue: form[i][1].value
-        })
+        });
 
     }
 
-    dadosCriacaoQuizz.levels.push(quizzNivel)
+    dadosCriacaoQuizz.levels.push(quizzNivel);
 
     let listaBool = [];
     for (let i = 0; form.length > i; i++) {
@@ -290,13 +290,14 @@ function validarNiveis() {
     }
 }
 
+
+
 //Adicionar quizzes no local storage para renderizar no espaço quizzes-usuario  
-let quizzCriado = { objetoNoFormato: id };
-const enviandoQuizz = axios.post("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes", quizzCriado);
-enviandoQuizz.then(adicionarQuizzesDoUsuario);
-enviandoQuizz.catch((erro) => { console.log("erro ao enviar"); });
-
-
+function adicionarQuizzServidor() {
+    const enviandoQuizz = axios.post("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes", dadosCriacaoQuizz);
+    enviandoQuizz.then(adicionarQuizzesDoUsuario);
+    enviandoQuizz.catch((erro) => { console.log("erro ao enviar"); });
+}
 
 function adicionarQuizzesDoUsuario(resposta) {
     let idUsuarioCadastrado = resposta.data[0].id;
@@ -312,9 +313,28 @@ function adicionarQuizzesDoUsuario(resposta) {
     localStorage.setItem("idsQuizzes", idsQuizzesJSON);
 }
 
+//insere quizz criado na tela de sucesso 
+
+function inserirQuizzCriado() {
+    const espacoQuizzCriado = document.querySelector(".quizz-criado");
+    espacoQuizzCriado.innerHTML = `
+        <h1>Seu quizz está pronto!</h1>
+        <div class="quizz"> 
+            <img src="${dadosCriacaoQuizz.image}"/>
+            <div class="efeito-imagem"></div>
+            <div class="titulo-quiz">${dadosCriacaoQuizz.title}</div>
+        </div>
+        <button class='acessar-quizz' onclick="renderizarQuizzes()" >Acessar Quizz</button>
+        <button class="voltar-home">Voltar pra home</button>
+    `;
+    espacoQuizzCriado.classList.remove("escondido");
+}
 
 // função acessar home 
 function volarHome() {
+    home.classList.remove("escondido");
 }
+
+
 
 

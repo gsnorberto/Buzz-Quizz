@@ -24,9 +24,9 @@ function reinderizarTodosQuizzes(resposta){
     console.log("resposta chegou");
     console.log(resposta.data);
     //supor que o quizz do usuario tenha id : 16629
-    let idUsuario= ["16629"]
+    
     for(let i=0; i<=50;i++){
-        if(idUsuario.indexOf(String(resposta.data[i].id)) !== -1 ){
+        if(idUsuariosLocais.indexOf(String(resposta.data[i].id)) !== -1 ){
             quizzesVazio.classList.add("escondido");
             quizzesUsuario.classList.remove("escondido");
             quizzesUsuario.innerHTML+=`

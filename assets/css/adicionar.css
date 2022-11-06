@@ -281,4 +281,8 @@ form input::placeholder{
     .prosseguir, .finalizar{
         width: 324px;
     }
-}
+
+    .quizz-criado img, .efeito-imagem{
+        width: 375px;
+    }
+ }
