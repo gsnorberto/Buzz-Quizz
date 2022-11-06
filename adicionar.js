@@ -5,6 +5,8 @@ const infosBasicas = document.querySelector('.infos-basicas');
 const criarPerguntas = document.querySelector('.criar-perguntas');
 const criarNiveis = document.querySelector('.criar-niveis');
 
+//lista com o quizz criado pelo usuário
+let dadosCriacaoQuizz = {title:"" , image:"", questions: [], levels: []}
 
 //verifica se a string é um url
 function verificaUrl(termo) {
@@ -16,10 +18,10 @@ function verificaUrl(termo) {
     }
 }
 
-let numPerguntas;
-let numNiveis = 2;
-let titulo;
-let url;
+let numPerguntas; //numero de perguntas do quizz
+let numNiveis = 2; //numero de niveis do quizz
+let titulo; //titulo do Quizz
+let url; //url da imagem do quizz
 
 
 function validarInformacoes() {
@@ -34,6 +36,7 @@ function validarInformacoes() {
     titulo = tituloQuizz;
     url = urlQuizz;
 
+
     if (tituloQuizz.length < 20 || tituloQuizz.length > 65) {
         console.log('que');
         return alert("Preencha o título corretamente");
@@ -43,6 +46,8 @@ function validarInformacoes() {
         return alert("Preencha o número de níveis corretamente");
     } else if (urlQuizz !== '') {
         if (verificaUrl(urlQuizz) === true) {
+            dadosCriacaoQuizz.title = tituloQuizz
+            dadosCriacaoQuizz.image = urlQuizz
             infosBasicas.classList.add('escondido');
             criarPerguntas.classList.remove('escondido');
             inserirPerguntas();
@@ -51,6 +56,8 @@ function validarInformacoes() {
         }
     }
 }
+
+console.log(dadosCriacaoQuizz)
 
 //insere o número de Perguntas escolhido pelo usuário na 1ª tela
 function inserirPerguntas() {
@@ -102,9 +109,12 @@ function editarPergunta(item) {
     item.classList.add('escondido');
 }
 
+
 // função para validar o formulário de perguntas criadas
 function validarPerguntas() {
 
+    let quizzQuestion = [];
+   
     const form = [];
     for (let i = 0; numPerguntas > i; i++) {
         let formulario = document.querySelector(`form.n${i + 1}`);
@@ -155,10 +165,41 @@ function validarPerguntas() {
                 return;
             }
         }
+
+        quizzQuestion.push({
+            title: form[i][0].value,
+            color: form[i][1].value,
+            answers: [
+                {
+                    title: form[i][2].value,
+                    color: form[i][3].value,
+                    isCorrectAnswer: true
+                },
+                {
+                    title: form[i][4].value,
+                    color: form[i][5].value,
+                    isCorrectAnswer: false
+                },
+                {
+                    title: form[i][6].value,
+                    color: form[i][7].value,
+                    isCorrectAnswer: false
+
+                },
+                {
+                    title: form[i][8].value,
+                    color: form[i][9].value,
+                    isCorrectAnswer: false
+                }
+            ]
+        })
+        
     }
 
+    dadosCriacaoQuizz.questions.push(quizzQuestion)
     mudarTelaNiveis();
 }
+
 
 //função para abri a tela de criação de niveis
 
@@ -192,8 +233,11 @@ function inserirNiveis() {
 
 //função para validar as informações dos níveis
 function validarNiveis() {
+
+    let quizzNivel = []
+
     const form = [];
-    for (let i = 0; numNiveis > i; i++) {
+        for (let i = 0; numNiveis > i; i++) {
         let formulario = document.querySelector(`form.n${i + 1}`);
         form.push(formulario);
     }
@@ -202,22 +246,35 @@ function validarNiveis() {
         if ((form[i][0].value).length < 20) {
             console.log('titulo invalido');
             alert('Preencha o título do nível corretamente');
+            return
         }
         else if (Number((form[i][1].value)) >= 100 || Number((form[i][1].value)) < 0) {
             console.log("% inválida");
             alert("Porcentagem mínima inválida");
+            return
         }
         else if (verificaUrl(form[i][2].value) === false) {
             console.log("url inválida");
             alert("Preencha a url corretamente");
+            return
         }
         else if (form[i][3].length < 30) {
             console.log("Descrição invalida");
             alert("Preencha a descrição corretamente");
-
+            return
         }
+        
+        quizzNivel.push({
+            title: form[i][0].value,
+            image: form[i][2].value,
+            text: form[i][3].value,
+            minValue: form[i][1].value
+        })
 
     }
+
+    dadosCriacaoQuizz.levels.push(quizzNivel)
+
     let listaBool = [];
     for (let i = 0; form.length > i; i++) {
         if (Number((form[i][1].value)) === 0) {
@@ -259,4 +316,5 @@ function adicionarQuizzesDoUsuario(resposta) {
 // função acessar home 
 function volarHome() {
 }
+
 
