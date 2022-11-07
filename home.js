@@ -44,7 +44,7 @@ function renderizarTodosQuizzes(resposta){
             quizzesUsuario.innerHTML+=`
             <div class="quizz" onclick="verificarQuizz(${todosOsQuizzes[i].id})"> 
                 <img src="${todosOsQuizzes[i].image}"/>
-                <div class="efeito-imagem"></div>
+                <div class="efeito-imagem efeito-imagem-responsivo"></div>
                 <div class="titulo-quiz-home">${todosOsQuizzes[i].title}</div>
             </div>
             `
@@ -54,7 +54,7 @@ function renderizarTodosQuizzes(resposta){
             quizzesGerais.innerHTML+=`
             <div class="quizz" onclick="verificarQuizz(${todosOsQuizzes[i].id})"> 
                 <img src="${todosOsQuizzes[i].image}"/>
-                <div class="efeito-imagem"></div>
+                <div class="efeito-imagem efeito-imagem-responsivo"></div>
                 <div class="titulo-quiz-home">${todosOsQuizzes[i].title}</div>
             </div>
             `
