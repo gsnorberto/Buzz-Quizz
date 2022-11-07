@@ -1,12 +1,9 @@
-let idUsuariosLocais;
+
 //Validação da tela 3.1 ao apertar no botão de seguir
 
 const infosBasicas = document.querySelector('.infos-basicas');
 const criarPerguntas = document.querySelector('.criar-perguntas');
 const criarNiveis = document.querySelector('.criar-niveis');
-
-//lista com o quizz criado pelo usuário
-let dadosCriacaoQuizz = { title: "", image: "", questions: [], levels: [] };
 
 //verifica se a string é um url
 function verificaUrl(termo) {
@@ -38,7 +35,6 @@ function validarInformacoes() {
 
 
     if (tituloQuizz.length < 20 || tituloQuizz.length > 65) {
-        console.log('que');
         return alert("Preencha o título corretamente");
     } else if (qntPerguntas < 3) {
         return alert("Preencha o número de perguntas corretamente");
@@ -56,8 +52,6 @@ function validarInformacoes() {
         }
     }
 }
-
-console.log(dadosCriacaoQuizz);
 
 //insere o número de Perguntas escolhido pelo usuário na 1ª tela
 function inserirPerguntas() {
@@ -108,7 +102,6 @@ function editarPergunta(item) {
     formulario.classList.remove('escondido');
     item.classList.add('escondido');
 }
-
 
 // função para validar o formulário de perguntas criadas
 function validarPerguntas() {
@@ -171,24 +164,24 @@ function validarPerguntas() {
             color: form[i][1].value,
             answers: [
                 {
-                    title: form[i][2].value,
-                    color: form[i][3].value,
+                    text: form[i][2].value,
+                    image: form[i][3].value,
                     isCorrectAnswer: true
                 },
                 {
-                    title: form[i][4].value,
-                    color: form[i][5].value,
+                    text: form[i][4].value,
+                    image: form[i][5].value,
                     isCorrectAnswer: false
                 },
                 {
-                    title: form[i][6].value,
-                    color: form[i][7].value,
+                    text: form[i][6].value,
+                    image: form[i][7].value,
                     isCorrectAnswer: false
 
                 },
                 {
-                    title: form[i][8].value,
-                    color: form[i][9].value,
+                    text: form[i][8].value,
+                    image: form[i][9].value,
                     isCorrectAnswer: false
                 }
             ]
@@ -196,13 +189,11 @@ function validarPerguntas() {
 
     }
 
-    dadosCriacaoQuizz.questions.push(quizzQuestion);
+    dadosCriacaoQuizz.questions = quizzQuestion;
     mudarTelaNiveis();
 }
 
-
 //função para abri a tela de criação de niveis
-
 function mudarTelaNiveis() {
     criarPerguntas.classList.add('escondido');
     criarNiveis.classList.remove('escondido');
@@ -210,7 +201,6 @@ function mudarTelaNiveis() {
 }
 
 // insere o número de níveis escolhidos pelo usuário 
-
 function inserirNiveis() {
     const espacoNiveis = document.querySelector(".espaco-niveis");
     console.log(espacoNiveis);
@@ -238,7 +228,7 @@ function validarNiveis() {
 
     const form = [];
     for (let i = 0; numNiveis > i; i++) {
-        let formulario = document.querySelector(`form.n${i + 1}`);
+        let formulario = document.querySelector(`form.z${i + 1}`);
         form.push(formulario);
     }
 
@@ -254,7 +244,9 @@ function validarNiveis() {
             return;
         }
         else if (verificaUrl(form[i][2].value) === false) {
+            
             console.log("url inválida");
+            console.log(form[i][2].value);
             alert("Preencha a url corretamente");
             return;
         }
@@ -273,7 +265,7 @@ function validarNiveis() {
 
     }
 
-    dadosCriacaoQuizz.levels.push(quizzNivel);
+    dadosCriacaoQuizz.levels = quizzNivel;
 
     let listaBool = [];
     for (let i = 0; form.length > i; i++) {
@@ -286,21 +278,26 @@ function validarNiveis() {
         alert("Pelo menos um nível com a porcentagem de acerto igual a 0%");
     }
     else {
+        console.log(dadosCriacaoQuizz);
         criarNiveis.classList.add('escondido');
         adicionarQuizzServidor();
-        inserirQuizzCriado();
     }
 }
 
 //Adicionar quizzes no local storage para renderizar no espaço quizzes-usuario  
 function adicionarQuizzServidor() {
+    
     const enviandoQuizz = axios.post("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes", dadosCriacaoQuizz);
     enviandoQuizz.then(adicionarQuizzesDoUsuario);
-    enviandoQuizz.catch((erro) => { console.log("erro ao enviar"); });
+    enviandoQuizz.catch((erro) => { alert("Erro ao adicionar quiz no servidor"); });
 }
 
 function adicionarQuizzesDoUsuario(resposta) {
-    let idUsuarioCadastrado = resposta.data[0].id;
+    idUsuarioCadastrado = resposta.data.id;
+    console.log(resposta.data);
+    console.log(resposta.data.id);
+
+    // Adicionar id do Quizz do usuários no localStorage
     let idsQuizzesJSON = localStorage.getItem("idsQuizzes");
     idUsuariosLocais = JSON.parse(idsQuizzesJSON);
     if (idUsuariosLocais) {
@@ -311,6 +308,8 @@ function adicionarQuizzesDoUsuario(resposta) {
     }
     idsQuizzesJSON = JSON.stringify(idUsuariosLocais);
     localStorage.setItem("idsQuizzes", idsQuizzesJSON);
+
+    inserirQuizzCriado();
 }
 
 //insere quizz criado na tela de sucesso 
@@ -323,8 +322,8 @@ function inserirQuizzCriado() {
             <div class="efeito-imagem-adicionar"></div>
             <div class="titulo-quiz">${dadosCriacaoQuizz.title}</div>
         </div>
-        <button class='acessar-quizz' onclick="renderizarQuizzes()" >Acessar Quizz</button>
-        <button class="voltar-home">Voltar pra home</button>
+        <button class='acessar-quizz' onclick="verificarQuizz(${idUsuarioCadastrado})" >Acessar Quizz</button>
+        <button class="voltar-home" onclick="voltarParaHome()">Voltar pra home</button>
     `;
     espacoQuizzCriado.classList.remove("escondido");
 }

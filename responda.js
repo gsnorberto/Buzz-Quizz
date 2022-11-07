@@ -7,12 +7,13 @@ let perguntaAtual = 0;
 
 function verificarQuizz(id){
     axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${id}`)
-        .then((res) => { 
+        .then((res) => {
             quizzClicado = res.data;
             renderizarQuizzes()
         })
         .catch((error) => alert("Quizz não encontrado"));
 }
+
 //Renderizar os quizzes na tela
 function renderizarQuizzes() {
     qntPerguntas = quizzClicado.questions.length;
@@ -79,6 +80,7 @@ function renderizarQuizzes() {
     window.scrollTo(0, 0);
 
     document.querySelector('.container').classList.add('escondido');
+    document.querySelector('.adicionar-quizz').classList.add('escondido');
     document.querySelector('.responda').classList.remove('escondido');
 }
 
@@ -152,6 +154,7 @@ function renderizarResposta(){
     console.log(respostaFinal);
 
     //Renderizar Resposta Final na tela
+    
     document.querySelector('.area-quizz').innerHTML += `
         <div class="quizz-responda resultado-quizz">
             <div class="titulo-resultado pergunta-3">
@@ -172,11 +175,13 @@ function renderizarResposta(){
 }
 
 function reiniciarQuizz() {
-    document.location.reload(true);
+    respostasCorretas = [];
+    qntAcertos = 0;
+    perguntaAtual = 0;
+    document.querySelector('.area-quizz').innerHTML = '';
+    window.scrollTo(0, 0);
+    renderizarQuizzes();
+
+    //document.location.reload(true);
 }
 
-function voltarParaHome() {
-    document.querySelector('.responda').classList.add('escondido');
-    window.scrollTo(0, 0);
-    document.querySelector('.container').classList.remove('escondido');
-}

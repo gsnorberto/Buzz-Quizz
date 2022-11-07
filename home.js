@@ -1,5 +1,9 @@
 let idsQuizzesLocais = [];
 let todosOsQuizzes = [];
+let idUsuarioCadastrado;
+let idUsuariosLocais;
+let dadosCriacaoQuizz = { title: "", image: "", questions: [], levels: [] }; //lista com o quizz criado pelo usuário
+
 //---------(Provisorio) Dinâmica das duas telas dos Quizzes do Usuário-------- //
 const home = document.querySelector(".container")
 const quizzesVazio= document.querySelector(".quizzes-usuario-vazio");
@@ -8,6 +12,7 @@ const quizzesGerais = document.querySelector(".todos-os-quizzes");
 
 //------------Função que vai reinderizar quizzes do usuario, caso haja----------------//
 function adicionarNovoQuizz(){
+    dadosCriacaoQuizz = { title: "", image: "", questions: [], levels: [] };
     document.querySelector('.container').classList.add('escondido');
     document.querySelector('.adicionar-quizz').classList.remove('escondido');
 }
@@ -64,3 +69,9 @@ function importarQuizzes(){
     promise.catch((error) => {console.log("Erro ao obter todos os Quizzes")});
 }
 
+function voltarParaHome() {
+    document.location.reload(true);
+    // document.querySelector('.responda').classList.add('escondido');
+    // window.scrollTo(0, 0);
+    // document.querySelector('.container').classList.remove('escondido');
+}
