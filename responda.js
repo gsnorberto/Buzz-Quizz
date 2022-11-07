@@ -91,9 +91,6 @@ function verificarResposta(resClicada, numDaQuestao){
         //Resposta verdadeira
         if(respostasCorretas[numDaQuestao] == resClicada){
             qntAcertos++;
-            console.log("Acertou")
-        } else { //Resposta verdadeira
-            console.log("Errou")
         }
     
         //Marcar respostas certas e erradas
@@ -116,7 +113,6 @@ function verificarResposta(resClicada, numDaQuestao){
     
         //Chegou na última pergunta
         if(numDaQuestao === qntPerguntas-1){
-            console.log("Chegou!!!");
             renderizarResposta();
     
             //Scrollar para resposta final depois de 2s
@@ -151,10 +147,7 @@ function renderizarResposta(){
         }
     }
 
-    console.log(respostaFinal);
-
     //Renderizar Resposta Final na tela
-    
     document.querySelector('.area-quizz').innerHTML += `
         <div class="quizz-responda resultado-quizz">
             <div class="titulo-resultado pergunta-3">
@@ -181,7 +174,5 @@ function reiniciarQuizz() {
     document.querySelector('.area-quizz').innerHTML = '';
     window.scrollTo(0, 0);
     renderizarQuizzes();
-
-    //document.location.reload(true);
 }
 

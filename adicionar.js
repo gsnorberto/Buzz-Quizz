@@ -1,6 +1,5 @@
 
 //Validação da tela 3.1 ao apertar no botão de seguir
-
 const infosBasicas = document.querySelector('.infos-basicas');
 const criarPerguntas = document.querySelector('.criar-perguntas');
 const criarNiveis = document.querySelector('.criar-niveis');
@@ -118,42 +117,34 @@ function validarPerguntas() {
 
     for (let i = 0; form.length > i; i++) {
         if ((form[i][0].value).length < 20) {
-            console.log('titulo invalido');
             alert('Preencha a pergunta corretamente');
             return;
         } else if (padrao.test(form[i][1].value) === false) {
-            console.log('cor invalida');
             alert('Preencha a cor corretamente');
             return;
         } else if ((form[i][2].value) === '' || (form[i][3].value) === '') {
-            console.log("ta vazio a resposta correta");
             alert("Preencha a resposta corretamente");
             return;
         } else if ((form[i][4].value) === '' && (form[i][6].value) === '' && (form[i][8].value) === '') {
-            console.log('ta vazia todas as respostas erradas');
             alert('Preencha alguma das respostas erradas pelo menos');
             return;
         } else if (form[i][3] !== '') {
             if (verificaUrl(form[i][3].value) === false) {
-                console.log('eita');
                 alert('Preencha a url corretamente');
                 return;
             }
         } else if (form[i][5] !== '') {
             if (verificaUrl(form[i][5].value) === false) {
-                console.log('eita');
                 alert('Preencha a url corretamente');
                 return;
             }
         } else if (form[i][7] !== '') {
             if (verificaUrl(form[i][7].value) === false) {
-                console.log('eita');
                 alert('Preencha a url corretamente');
                 return;
             }
         } else if (form[i][9] !== '') {
             if (verificaUrl(form[i][9].value) === false) {
-                console.log('eita');
                 alert('Preencha a url corretamente');
                 return;
             }
@@ -203,7 +194,6 @@ function mudarTelaNiveis() {
 // insere o número de níveis escolhidos pelo usuário 
 function inserirNiveis() {
     const espacoNiveis = document.querySelector(".espaco-niveis");
-    console.log(espacoNiveis);
     for (let i = 0; numNiveis > i; i++) {
         espacoNiveis.innerHTML += `
     <div class="caixa-nivel z${i + 1}" onclick="editarPergunta(this)">
@@ -234,24 +224,18 @@ function validarNiveis() {
 
     for (let i = 0; form.length > i; i++) {
         if ((form[i][0].value).length < 20) {
-            console.log('titulo invalido');
             alert('Preencha o título do nível corretamente');
             return;
         }
         else if (Number((form[i][1].value)) >= 100 || Number((form[i][1].value)) < 0) {
-            console.log("% inválida");
             alert("Porcentagem mínima inválida");
             return;
         }
         else if (verificaUrl(form[i][2].value) === false) {
-            
-            console.log("url inválida");
-            console.log(form[i][2].value);
             alert("Preencha a url corretamente");
             return;
         }
         else if (form[i][3].length < 30) {
-            console.log("Descrição invalida");
             alert("Preencha a descrição corretamente");
             return;
         }
@@ -274,11 +258,9 @@ function validarNiveis() {
         }
     }
     if (listaBool.length === 0) {
-        console.log("uma porcentagem zero, ao menos");
         alert("Pelo menos um nível com a porcentagem de acerto igual a 0%");
     }
     else {
-        console.log(dadosCriacaoQuizz);
         criarNiveis.classList.add('escondido');
         adicionarQuizzServidor();
     }
@@ -294,8 +276,6 @@ function adicionarQuizzServidor() {
 
 function adicionarQuizzesDoUsuario(resposta) {
     idUsuarioCadastrado = resposta.data.id;
-    console.log(resposta.data);
-    console.log(resposta.data.id);
 
     // Adicionar id do Quizz do usuários no localStorage
     let idsQuizzesJSON = localStorage.getItem("idsQuizzes");

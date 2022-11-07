@@ -61,17 +61,14 @@ function renderizarTodosQuizzes(resposta){
         }
     }
 }
-//--------------Função que busca Todos os quizzes do servidor --------------//
 
+//--------------Função que busca Todos os quizzes do servidor --------------//
 function importarQuizzes(){
     let promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
     promise.then(renderizarTodosQuizzes);
-    promise.catch((error) => {console.log("Erro ao obter todos os Quizzes")});
+    promise.catch((error) => {alert("Erro ao obter todos os Quizzes")});
 }
 
 function voltarParaHome() {
     document.location.reload(true);
-    // document.querySelector('.responda').classList.add('escondido');
-    // window.scrollTo(0, 0);
-    // document.querySelector('.container').classList.remove('escondido');
 }
