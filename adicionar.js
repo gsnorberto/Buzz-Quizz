@@ -149,34 +149,54 @@ function validarPerguntas() {
                 return;
             }
         }
+    }
 
-        quizzQuestion.push({
-            title: form[i][0].value,
-            color: form[i][1].value,
-            answers: [
+    for(let i = 0; form.length > i; i++){
+        let respostas = []
+        if((form[i][2].value) !== ''){
+            respostas.push(
                 {
                     text: form[i][2].value,
                     image: form[i][3].value,
                     isCorrectAnswer: true
-                },
+                }
+            )
+        }
+        if((form[i][4].value) !== ''){
+            respostas.push(
                 {
                     text: form[i][4].value,
                     image: form[i][5].value,
                     isCorrectAnswer: false
-                },
+                }
+            )
+        }
+        if((form[i][6].value) !== ''){
+            respostas.push(
                 {
                     text: form[i][6].value,
                     image: form[i][7].value,
                     isCorrectAnswer: false
 
-                },
+                }
+            )
+        }
+        if((form[i][8].value) !== ''){
+            respostas.push(
                 {
                     text: form[i][8].value,
                     image: form[i][9].value,
                     isCorrectAnswer: false
                 }
-            ]
-        });
+            )
+        }
+
+        
+    quizzQuestion.push({
+        title: form[i][0].value,
+        color: form[i][1].value,
+        answers: respostas
+    });
 
     }
 
