@@ -287,10 +287,10 @@ function validarNiveis() {
     }
     else {
         criarNiveis.classList.add('escondido');
+        adicionarQuizzServidor();
+        inserirQuizzCriado();
     }
 }
-
-
 
 //Adicionar quizzes no local storage para renderizar no espaço quizzes-usuario  
 function adicionarQuizzServidor() {
@@ -314,14 +314,13 @@ function adicionarQuizzesDoUsuario(resposta) {
 }
 
 //insere quizz criado na tela de sucesso 
-
 function inserirQuizzCriado() {
     const espacoQuizzCriado = document.querySelector(".quizz-criado");
     espacoQuizzCriado.innerHTML = `
         <h1>Seu quizz está pronto!</h1>
         <div class="quizz"> 
             <img src="${dadosCriacaoQuizz.image}"/>
-            <div class="efeito-imagem"></div>
+            <div class="efeito-imagem-adicionar"></div>
             <div class="titulo-quiz">${dadosCriacaoQuizz.title}</div>
         </div>
         <button class='acessar-quizz' onclick="renderizarQuizzes()" >Acessar Quizz</button>
@@ -334,7 +333,3 @@ function inserirQuizzCriado() {
 function volarHome() {
     home.classList.remove("escondido");
 }
-
-
-
-

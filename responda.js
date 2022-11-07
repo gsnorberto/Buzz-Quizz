@@ -1,24 +1,20 @@
-let todosOsQuizzes = [];
+//let todosOsQuizzes = [];
 let respostasCorretas = [];
 let quizzClicado = {}; // Todas as informações do Quizz
 let qntAcertos = 0; // Quantidade de questões acertadas pelo usuário
 let qntPerguntas; // Quantidade de perguntas que o quizz possui
 let perguntaAtual = 0;
 
-// (Provisório) Obter todos os Quizzes
-axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes")
-    .then((response) => {
-        todosOsQuizzes = response.data;
-        console.log(todosOsQuizzes);
-        renderizarQuizzes(todosOsQuizzes[10].id); //id do quizz
-    }).catch((error) => {
-        console.log("Erro ao obter todos os Quizzes");
-    });
-
+function verificarQuizz(id){
+    axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${id}`)
+        .then((res) => { 
+            quizzClicado = res.data;
+            renderizarQuizzes()
+        })
+        .catch((error) => alert("Quizz não encontrado"));
+}
 //Renderizar os quizzes na tela
-function renderizarQuizzes(id) {
-    quizzClicado = (todosOsQuizzes.filter((q) => q.id === id))[0];
-    console.log(quizzClicado);
+function renderizarQuizzes() {
     qntPerguntas = quizzClicado.questions.length;
 
     //Título do quizz: ok
@@ -68,7 +64,7 @@ function renderizarQuizzes(id) {
 
         //PERGUNTA QUIZZ - RENDERIZAR NA TELA
         document.querySelector('.area-quizz').innerHTML += `
-            <div class="quizz">
+            <div class="quizz-responda">
                 <div class="pergunta-quizz" style="background-color: ${quizzClicado.questions[i].color}">
                     ${quizzClicado.questions[i].title} 
                 </div>
@@ -79,8 +75,11 @@ function renderizarQuizzes(id) {
         `
     }
     
-    //Tirar oculto da tag area quizz
-    // pendente.... 
+    //imagem-topo
+    window.scrollTo(0, 0);
+
+    document.querySelector('.container').classList.add('escondido');
+    document.querySelector('.responda').classList.remove('escondido');
 }
 
 // Verificar se a resposta está certa ou errada no momento em que o usuário clica em uma opção
@@ -126,13 +125,13 @@ function verificarResposta(resClicada, numDaQuestao){
         } else {
             //Scrollar para próxima pergunta depois de 2s
             setTimeout(() => {
-                let proxQuizz = document.querySelector(`.area-quizz .quizz:nth-child(${numDaQuestao+2})`)
+                let proxQuizz = document.querySelector(`.area-quizz .quizz-responda:nth-child(${numDaQuestao+2})`)
                 proxQuizz.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
             }, 2000);
         }
     } else {
         alert(`Responda o quizz ${perguntaAtual + 1}`);
-        let proxQuizz = document.querySelector(`.area-quizz .quizz:nth-child(${perguntaAtual + 1})`)
+        let proxQuizz = document.querySelector(`.area-quizz .quizz-responda:nth-child(${perguntaAtual + 1})`)
         proxQuizz.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
     }
 
@@ -154,7 +153,7 @@ function renderizarResposta(){
 
     //Renderizar Resposta Final na tela
     document.querySelector('.area-quizz').innerHTML += `
-        <div class="quizz resultado-quizz">
+        <div class="quizz-responda resultado-quizz">
             <div class="titulo-resultado pergunta-3">
                 ${prctAcertos}% de acerto: ${respostaFinal.title}!
             </div>
@@ -175,7 +174,9 @@ function renderizarResposta(){
 function reiniciarQuizz() {
     document.location.reload(true);
 }
+
 function voltarParaHome() {
-    //Mostrar página home - Tela1: Lista de Quizzes
-    //Ocultar página Responda
+    document.querySelector('.responda').classList.add('escondido');
+    window.scrollTo(0, 0);
+    document.querySelector('.container').classList.remove('escondido');
 }

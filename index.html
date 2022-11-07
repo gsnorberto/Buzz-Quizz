@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/home.css">
     <link rel="stylesheet" href="./assets/css/adicionar.css">
+    <link rel="stylesheet" href="./assets/css/responda.css">
 
     <!--fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,9 +23,34 @@
     <!-- cabeçalho -->
     <header>BuzzQuizz</header>
 
-    <div class="adicionar-quizz">
+
+    <!-- TELA 1 (HOME): Lista de quizes-->
+    <div class="container">
+        <!-- Quizzes do usuario Vazio-->
+        <did class="quizzes-usuario-vazio" >
+            <div class="quizz-status-usuario">
+                <p>Você não criou nenhum quizz ainda :(</p>
+            </div>
+            <button onclick="adicionarNovoQuizz()">Criar Quizz</button>
+        </did>
+        <h1></h1>
+        <!-- Quizzes do usuario-->
+        <div class="quizzes-usuario escondido">
+            <div class="topo">
+                <h1>Seus Quizzes</h1>
+                <button onclick="adicionarNovoQuizz()">+</button>
+            </div>
+        </div>
+        <!-- Todos os Quizzes-->
+        <div class="todos-os-quizzes">
+            <h1>Todos os Quizzes</h1> 
+        </div>
+    </div>
+
+    <!-- TELA 2: Adicionar Quizz-->
+    <div class="adicionar-quizz escondido">
         <!-- Comece pelo começo -->
-        <div class="infos-basicas escondido">
+        <div class="infos-basicas">
             <h1>Comece pelo começo</h1>
             <form>
                 <input type="text" class="titulo-quizz" placeholder="Título do seu quizz">
@@ -55,12 +81,31 @@
         </div>
 
         <!-- Sucesso do quiz-->
-        <div class="quizz-criado ">
+        <div class="quizz-criado escondido">
         
         </div>
     </div>
 
+    <!-- TELA 3: RESPONDER QUIZZ -->
+    <div class="responda escondido">
+        <div class="imagem-topo">
+            
+        </div>
+
+        <div class="area-quizz">
+
+        </div>
+
+        <div class="botoes-quizz">
+            <button onclick="reiniciarQuizz()" class="botao-reiniciarQuizz">Reiniciar Quizz</button>
+            <button onclick="voltarParaHome()" class="botao-home">Voltar para home</button>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./home.js"></script>
     <script src="./adicionar.js"></script>
+    <script src="./responda.js"></script>
 </body>
+
 </html>

@@ -1,3 +1,5 @@
+let idsQuizzesLocais = [];
+let todosOsQuizzes = [];
 //---------(Provisorio) Dinâmica das duas telas dos Quizzes do Usuário-------- //
 const home = document.querySelector(".container")
 const quizzesVazio= document.querySelector(".quizzes-usuario-vazio");
@@ -5,10 +7,9 @@ const quizzesUsuario=document.querySelector(".quizzes-usuario");
 const quizzesGerais = document.querySelector(".todos-os-quizzes");
 
 //------------Função que vai reinderizar quizzes do usuario, caso haja----------------//
-function reconfigurarHomeUsuario(){
-    
-    quizzesVazio.classList.toggle("escondido");
-    quizzesUsuario.classList.toggle("escondido");
+function adicionarNovoQuizz(){
+    document.querySelector('.container').classList.add('escondido');
+    document.querySelector('.adicionar-quizz').classList.remove('escondido');
 }
 
 //------------(Provisorio) Redirecionar para o quizz em questão --------------//
@@ -19,30 +20,37 @@ function iniciarQuizz(){
 
 //-------------Função que reinderiza Todos os quizzes do servidor -----------//
 importarQuizzes();
-reinderizarTodosQuizzes();
-function reinderizarTodosQuizzes(resposta){
-    console.log("resposta chegou");
-    console.log(resposta.data);
-    //supor que o quizz do usuario tenha id : 16629
+renderizarTodosQuizzes();
+function renderizarTodosQuizzes(resposta){
+    todosOsQuizzes = resposta.data;
+    
+    // Verifica se há ids cadastrados no LocalStorage
+    let idsQuizzesJSON = localStorage.getItem("idsQuizzes");
+    let idsQuizzesLoc = JSON.parse(idsQuizzesJSON);
+    if(idsQuizzesLoc){
+        idsQuizzesLocais = idsQuizzesLoc;
+    }
     
     for(let i=0; i<=50;i++){
-        if(idUsuariosLocais.indexOf(String(resposta.data[i].id)) !== -1 ){
+        // QUizzes do usuário local
+        if(idsQuizzesLocais.includes(todosOsQuizzes[i].id) ){
             quizzesVazio.classList.add("escondido");
             quizzesUsuario.classList.remove("escondido");
             quizzesUsuario.innerHTML+=`
-            <div class="quizz" onclick="renderizarQuizzes(${resposta.data[i].id})"> 
-                <img src="${resposta.data[i].image}"/>
+            <div class="quizz" onclick="verificarQuizz(${todosOsQuizzes[i].id})"> 
+                <img src="${todosOsQuizzes[i].image}"/>
                 <div class="efeito-imagem"></div>
-                <div class="titulo-quiz">${resposta.data[i].title}</div>
+                <div class="titulo-quiz-home">${todosOsQuizzes[i].title}</div>
             </div>
             `
         }
+        // Outros Quizes
         else{
             quizzesGerais.innerHTML+=`
-            <div class="quizz" onclick="renderizarQuizzes(${resposta.data[i].id})"> 
-                <img src="${resposta.data[i].image}"/>
+            <div class="quizz" onclick="verificarQuizz(${todosOsQuizzes[i].id})"> 
+                <img src="${todosOsQuizzes[i].image}"/>
                 <div class="efeito-imagem"></div>
-                <div class="titulo-quiz">${resposta.data[i].title}</div>
+                <div class="titulo-quiz-home">${todosOsQuizzes[i].title}</div>
             </div>
             `
         }
@@ -52,7 +60,7 @@ function reinderizarTodosQuizzes(resposta){
 
 function importarQuizzes(){
     let promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
-    promise.then(reinderizarTodosQuizzes);
+    promise.then(renderizarTodosQuizzes);
     promise.catch((error) => {console.log("Erro ao obter todos os Quizzes")});
 }
 

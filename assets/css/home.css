@@ -1,7 +1,3 @@
-body {
-    font-family: 'Roboto', sans-serif;
-}
-
 header {
     position: fixed;
     width: 100%;
@@ -101,7 +97,7 @@ header {
     color: #FFFFFF;
 }
 .escondido{
-    display: none;
+    display: none !important;
 }
 .todos-os-quizzes {
     width: 1051px;
@@ -132,8 +128,6 @@ header {
     margin-bottom: 5px;
     margin-right: 10px;
     cursor: pointer;
-
-
 }
 
 .quizz img {
@@ -153,7 +147,7 @@ header {
     left: 0;
 
 }
-.titulo-quiz {
+.titulo-quiz-home {
     position: absolute;
     top: 120px;
     left: 18px;
